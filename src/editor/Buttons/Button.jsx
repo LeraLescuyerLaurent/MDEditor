@@ -1,0 +1,35 @@
+import {h,Component} from 'preact'
+
+
+export default class Button extends Component{
+
+    shortcut = null
+
+
+    componentDidMount () {
+        this.props.editor.setOption('extraKeys' , {
+            ...this.props.editor.getOption('extraKeys'),
+            [this.shortcut]: () => {
+                this.action(this.props.editor)
+            }
+        })
+    }
+
+    render (props,state){
+        return <button onClick={this.onClick}>
+            {this.icon(props,state)}
+        </button>
+    }
+    icon () {
+        return null
+    }
+
+
+    onClick = (e)  => {
+        e.preventDefault();
+        this.action(this.props.editor)
+    }
+
+
+    action () {}
+}
